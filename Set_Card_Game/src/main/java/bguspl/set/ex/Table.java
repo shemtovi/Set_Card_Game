@@ -4,8 +4,7 @@ package bguspl.set.ex;
 
 import bguspl.set.Env;
 
-
-
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import java.util.HashSet;
@@ -91,7 +90,6 @@ public class Table {
         this.slotToCard = slotToCard;
 
         this.cardToSlot = cardToSlot;
-
         tokenBoard = new Set[env.config.tableSize];
 
         for(int i = 0; i< env.config.tableSize ; i++){
@@ -292,6 +290,20 @@ public class Table {
 
         return tokenBoard[slot].contains(player);
 
+    }
+
+    public int[] playerChosenCards(int player){
+        int[] ans = new int[env.config.featureSize];
+        int i = 0;
+        int j = 0;
+        for(Set set:tokenBoard){
+            if(set.contains(player)){
+                ans[i] = j;
+                i++;
+            }
+            j++;    
+        }
+        return ans;
     }
 
 }
